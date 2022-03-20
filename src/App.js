@@ -1,9 +1,17 @@
-
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Index from "./components/Index";
+import GlobalStyles from "./stylesheets/GlobalStyles";
 
 function App() {
   return (
     <>
-    <h1>Holi</h1>
+      <GlobalStyles />
+      <Router>
+        <Routes>
+          <Route path="/" element={<Index />} />
+        </Routes>
+      </Router>
     </>
   );
 }
