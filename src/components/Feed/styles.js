@@ -48,8 +48,7 @@ export const Form = styled.form`
     padding: 10px;
     font-size: 20px;
     line-height: 24px;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-      Helvetica, Arial, sans-serif;
+    font-family: "Poppins", sans-serif;
   }
 `;
 export const Div = styled.div`
@@ -118,7 +117,7 @@ export const Post = styled.div`
     margin-top: 5px;
   }
   :hover {
-  background-color: rgba(0, 0, 0, 3%);
+    background-color: rgba(0, 0, 0, 3%);
   }
 `;
 export const PostBody = styled.div`
@@ -137,14 +136,13 @@ export const PostBody = styled.div`
 `;
 export const PostDescription = styled.div`
   margin-bottom: 10px;
-  >p {
+  > p {
     text-align: justify;
     margin: 0;
     padding: 0;
     font-size: 16px;
     line-height: 16.7px;
   }
-
 `;
 export const Images = styled.img`
   object-fit: cover;
@@ -165,16 +163,16 @@ export const PostFooter = styled.div`
     align-items: stretch;
     gap: 10px;
   }
-  >.MuiSvgIcon-root:hover:nth-child(1){
+  .like .MuiSvgIcon-root:hover {
     fill: #1da1f2;
   }
-  >.MuiSvgIcon-root:hover:nth-child(2){
+  .dislike .MuiSvgIcon-root:hover {
     fill: #f91880;
   }
-  >.MuiSvgIcon-root:hover:nth-child(3){
+  .comment .MuiSvgIcon-root:hover {
     fill: #00ba7c;
   }
-  >.MuiSvgIcon-root:hover:nth-child(4){
+  .share .MuiSvgIcon-root:hover {
     fill: #1da1f2;
   }
 `;

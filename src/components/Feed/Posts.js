@@ -40,17 +40,17 @@ export const Posts = () => {
             alt="post"
           />
           <PostFooter>
-            <div className="icon-center">
-              <ThumbUpOutlinedIcon fontSize="small" /> <span>11</span>
+            <div className="icon-center like">
+              <ThumbUpOutlinedIcon fontSize="small" id="1" /> <span>11</span>
             </div>
-            <div className="icon-center">
-              <ThumbDownAltOutlinedIcon fontSize="small" /> <span>10</span>
+            <div className="icon-center dislike">
+              <ThumbDownAltOutlinedIcon fontSize="small" id="2" /> <span>10</span>
             </div>
-            <div className="icon-center">
-              <ChatBubbleOutlineIcon fontSize="small" /> <span>10</span>
+            <div className="icon-center comment">
+              <ChatBubbleOutlineIcon fontSize="small" id="3" /> <span>10</span>
             </div>
-            <div className="icon-center">
-              <ShareIcon fontSize="small" />
+            <div className="icon-center share">
+              <ShareIcon fontSize="small" id="4" />
             </div>
           </PostFooter>
         </div>

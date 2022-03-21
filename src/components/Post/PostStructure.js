@@ -59,10 +59,18 @@ export const PostStructure = () => {
           </PostDetails>
 
           <PostFooter>
-            <ThumbUpOutlinedIcon fontSize="small" />
-            <ThumbDownAltOutlinedIcon fontSize="small" />
-            <ChatBubbleOutlineIcon fontSize="small" />
-            <ShareIcon fontSize="small" />
+          <div className="icon-center like">
+              <ThumbUpOutlinedIcon fontSize="small" id="1" />
+            </div>
+            <div className="icon-center dislike">
+              <ThumbDownAltOutlinedIcon fontSize="small" id="2" />
+            </div>
+            <div className="icon-center comment">
+              <ChatBubbleOutlineIcon fontSize="small" id="3" />
+            </div>
+            <div className="icon-center share">
+              <ShareIcon fontSize="small" id="4" />
+            </div>
           </PostFooter>
         </div>
       </PostBody>
