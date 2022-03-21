@@ -1,14 +1,14 @@
+import { Posts } from './Posts';
 import { PostBox } from './PostBox';
 import {Container, Header} from './styles';
 
 export const Feed = () => {
   return (
     <Container>
-      {/* Header */}
-      <Header><h2>Home</h2></Header>
-      {/* PostBox */}
+      <Header><p>Home</p></Header>
       <PostBox />
-      {/* Posts */}
+      <Posts />
+      <Posts />
     </Container>
   )
 }

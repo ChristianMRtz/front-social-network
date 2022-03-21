@@ -4,7 +4,7 @@ export const Container = styled.div`
   display: flex;
   gap: 8px;
   flex-direction: column;
-  padding: 20px;
+  margin: 0 20px;
   border-right: 1px solid #ddd;
   flex: 0.2;
   min-width: 255px;
@@ -27,10 +27,40 @@ export const Container = styled.div`
     font-weight: 800 !important;
     text-transform: inherit !important;
     height: 46px !important;
+    max-width: 160px;
     padding: 0 30px !important;
     border-radius: 9999px !important;
     :hover {
       background-color: var(--blue-hover-twitter) !important;
+    }
+  }
+  @media only screen and (max-width: 1280px) {
+    flex: 0.05;
+    min-width: 50px;
+    > Button {
+      display: none;
+    }
+  }
+  @media only screen and (max-width: 1000px) {
+    width: 40px;
+  }
+  @media only screen and (max-width: 740px) {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: row;
+    z-index: 999;
+    height: 50px;
+    background-color: white;
+    width: 100%;
+    padding: 0;
+    .twitter-logo {
+      display: none;
+    }
+    p {
+      display: none;
     }
   }
 `;
@@ -66,4 +96,19 @@ export const IconSidebar = styled.div`
       color: black;
       font-weight: bold;
     `}
+  @media only screen and (max-width: 1280px) {
+    border-radius: 50%;
+    p {
+      display: none;
+    }
+  }
+  @media only screen and (max-width: 740px) {
+    color: #b8b8b8;
+    display: ${(props) => (props.primary ? "none" : "")};
+    color: ${(props) => (props.active ? "black" : "")};
+    :nth-child(6),
+    :nth-child(7) {
+      display: none;
+    }
+  }
 `;

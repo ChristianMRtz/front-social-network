@@ -13,12 +13,15 @@ export default createGlobalStyle`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   outline: 0;
 }
 
 body {
+  color: var(--gray-twitter);
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -30,6 +33,7 @@ code {
 
 .Home {
   display: flex;
+  justify-content: center;
   height: 100vh;
   max-width: 1250px;
   margin: 0 auto;
