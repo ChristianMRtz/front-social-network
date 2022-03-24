@@ -47,6 +47,9 @@ export const Post = styled.div`
   .post-avatar {
     margin-top: 5px;
   }
+  .username {
+    margin-left: 1em;
+  }
   :hover {
     background-color: rgba(0, 0, 0, 3%);
   }
@@ -85,6 +88,7 @@ export const Images = styled.img`
   min-width: 100%;
   width: 100%;
   min-height: 300px;
+  max-height: 300px;
 `;
 export const PostFooterComment = styled.div`
   display: flex;
@@ -93,6 +97,7 @@ export const PostFooterComment = styled.div`
   margin-top: 10px;
   color: #5b7083;
   transition: all 100ms ease-in;
+  margin-bottom: 50px;
   cursor: pointer;
   > .MuiSvgIcon-root:hover:nth-child(1) {
     fill: #1da1f2;
@@ -108,8 +113,9 @@ export const PostDetails = styled.div`
     flex-direction: row;
     gap: 20px;
   }
-`
-
-export const Comment = styled.div`
-
+  .date {
+    color: #536471;
+    font-size: 13.5px;
+    line-height: 20px;
+  }
 `

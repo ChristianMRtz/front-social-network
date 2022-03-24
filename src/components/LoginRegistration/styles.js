@@ -51,6 +51,11 @@ export const Container = styled.div`
     font-size: 16px;
     font-weight: 500;
     border: none;
+    border-radius: 2.5px;
+    :hover {
+      filter: brightness(0.9);
+      transition: 0.1s ease-in-out;
+    }
   }
   .formBx {
     position: absolute;
@@ -118,6 +123,10 @@ export const Container = styled.div`
     color: #fff;
     max-width: 100px;
     cursor: pointer;
+    :hover {
+      filter: brightness(0.8);
+      transition: 0.1s ease-in-out;
+    }
   }
   .formBox .form form .forgot {
     color: #333;

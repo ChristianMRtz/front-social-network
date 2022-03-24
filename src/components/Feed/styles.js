@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  flex: 0.5;
+  flex: 0.65;
   border-right: 1px solid #ddd;
   overflow-y: scroll;
   box-sizing: border-box;
@@ -10,16 +10,26 @@ export const Container = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  .idDiv {
+    cursor: pointer;
+    :hover {
+      background-color: rgba(0, 0, 0, 3%);
+    }
+  }
   @media only screen and (max-width: 1280px) {
-    flex: 0.55;
+    flex: 0.75;
   }
   @media only screen and (max-width: 1000px) {
-    flex: 0.95;
+    flex: 0.7;
+    .separation-mobile {
+      height: 50px;
+    }
   }
   @media only screen and (max-width: 600px) {
     flex: 1;
     margin-bottom: 50px;
   }
+  
 `;
 
 export const Header = styled.div`
@@ -107,7 +117,7 @@ export const Avatar = styled.img`
 /* Posts */
 
 export const Post = styled.div`
-  cursor: pointer;
+  pointer-events: none;
   padding: 10px 15px;
   border-bottom: 1px solid #ddd;
   margin-top: 5px;
@@ -115,9 +125,6 @@ export const Post = styled.div`
   align-items: flex-start;
   .post-avatar {
     margin-top: 5px;
-  }
-  :hover {
-    background-color: rgba(0, 0, 0, 3%);
   }
 `;
 export const PostBody = styled.div`
@@ -132,6 +139,12 @@ export const PostBody = styled.div`
   h3 {
     padding: 0;
     margin: 0;
+  }
+  .date {
+    color: #536471;
+    font-size: 12px;
+    line-height: 20px;
+    font-weight: normal;
   }
 `;
 export const PostDescription = styled.div`
@@ -150,6 +163,7 @@ export const Images = styled.img`
   min-width: 100%;
   width: 100%;
   min-height: 300px;
+  max-height: 300px;
 `;
 export const PostFooter = styled.div`
   display: flex;

@@ -10,6 +10,7 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Button } from "@mui/material";
 
 export const Sidebar = () => {
+  
   return (
     <Container>
       <TwitterIcon className="twitter-logo"/>

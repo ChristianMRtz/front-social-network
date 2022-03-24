@@ -11,12 +11,34 @@ import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ShareIcon from "@mui/icons-material/Share";
 
-export const Posts = () => {
+export const Posts = ({
+  avatar,
+  body,
+  username,
+  email,
+  date,
+  comments_count,
+  likes_count,
+  dislikes_count,
+  images
+}) => {
+  const parseDate = (date) => {
+    const dateFormat = new Date(date?.slice(0, -5));
+    return dateFormat.toLocaleString("en-US", {
+      weekday: "short",
+      day: "numeric",
+      year: "numeric",
+      month: "long",
+      hour: "numeric",
+      minute: "numeric",
+    });
+  };
+
   return (
     <Post>
       <div className="post-avatar">
         <Avatar
-          src="https://randomuser.me/api/portraits/women/13.jpg"
+          src={avatar}
           alt="user"
         />
       </div>
@@ -24,30 +46,25 @@ export const Posts = () => {
         <div>
           <div>
             <h3>
-              User name <span>@username</span>
+              {username} <span>{email}</span>
             </h3>
             <PostDescription>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                fugit atque, qui doloremque expedita, animi tenetur sunt sint
-                quos hic molestiae eos cum! Voluptatibus, corrupti qui similique
-                culpa nulla in.
-              </p>
+              <p>{body}</p>
             </PostDescription>
           </div>
-          <Images
-            src="https://pbs.twimg.com/media/FOUL1SxVIAYZec_?format=png&name=small"
-            alt="post"
-          />
+          {images ? <Images src="https://picsum.photos/1080/720" alt="post" /> : ""}
+          <p className="date">{parseDate(date)}</p>
           <PostFooter>
             <div className="icon-center like">
-              <ThumbUpOutlinedIcon fontSize="small" id="1" /> <span>11</span>
+              <ThumbUpOutlinedIcon fontSize="small" id="1" /> <span>{likes_count}</span>
             </div>
             <div className="icon-center dislike">
-              <ThumbDownAltOutlinedIcon fontSize="small" id="2" /> <span>10</span>
+              <ThumbDownAltOutlinedIcon fontSize="small" id="2" />{" "}
+              <span>{dislikes_count}</span>
             </div>
             <div className="icon-center comment">
-              <ChatBubbleOutlineIcon fontSize="small" id="3" /> <span>10</span>
+              <ChatBubbleOutlineIcon fontSize="small" id="3" />{" "}
+              <span>{comments_count}</span>
             </div>
             <div className="icon-center share">
               <ShareIcon fontSize="small" id="4" />

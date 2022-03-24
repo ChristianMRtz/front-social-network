@@ -1,5 +1,7 @@
 import { Container } from "../components/LoginRegistration/styles";
 import { useState } from "react";
+import { Registration } from "../components/LoginRegistration/Registration";
+import { Login } from "../components/LoginRegistration/Login";
 
 export const LoginAndRegistration = () => {
   const [isActive, setIsActive] = useState("");
@@ -32,27 +34,10 @@ export const LoginAndRegistration = () => {
           </div>
           <div className={"formBx " + isActive}>
             <div className="form signinForm">
-              <form>
-                <h3>Sign in</h3>
-                <input type="text" placeholder="Username" />
-                <input type="password" placeholder="Password" />
-                <input type="submit" value="Login" />
-                <a href="/" className="forgot">
-                  Forgot Password?
-                </a>
-              </form>
+              <Login />
             </div>
             <div className="form signupForm">
-              <form>
-                <h3>Sign up</h3>
-                <input type="text" placeholder="Username" />
-                <input type="text" placeholder="Email Address" />
-                <input type="text" placeholder="Name" />
-                <input type="text" placeholder="Last Name" />
-                <input type="password" placeholder="Password" />
-                <input type="password" placeholder="Confirm Password" />
-                <input type="submit" value="Register" />
-              </form>
+              <Registration />
             </div>
           </div>
         </div>

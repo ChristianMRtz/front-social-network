@@ -12,54 +12,68 @@ import ThumbDownAltOutlinedIcon from "@mui/icons-material/ThumbDownAltOutlined";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ShareIcon from "@mui/icons-material/Share";
 
-export const PostStructure = () => {
+export const PostStructure = ({
+  avatar,
+  body,
+  username,
+  email,
+  date,
+  comments_count,
+  likes_count,
+  dislikes_count,
+  images
+}) => {
+  const parseDate = (date) => {
+    const dateFormat = new Date(date?.slice(0, -5));
+    return dateFormat.toLocaleString("en-US", {
+      weekday: "short",
+      day: "numeric",
+      year: "numeric",
+      month: "long",
+      hour: "numeric",
+      minute: "numeric",
+    });
+  };
+
   return (
     <>
       <Post>
         <div className="post-avatar">
           <Avatar
-            src="https://randomuser.me/api/portraits/women/13.jpg"
+            src={avatar}
             alt="user"
           />
         </div>
         <div className="username">
-          <h3>User name</h3>
-          <h4>@username</h4>
+          <h3>{username}</h3>
+          <h4>{email}</h4>
         </div>
       </Post>
       <PostBody>
         <div>
           <div>
             <PostDescription>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                fugit atque, qui doloremque expedita, animi tenetur sunt sint
-                quos hic molestiae eos cum! Voluptatibus, corrupti qui similique
-                culpa nulla in.
-              </p>
+              <p>{body}</p>
             </PostDescription>
           </div>
-          <Images
-            src="https://pbs.twimg.com/media/FOUL1SxVIAYZec_?format=png&name=small"
-            alt="post"
-          />
+          {images ? <Images src="https://picsum.photos/1080/720" alt="post" /> : ""}
           <PostDetails>
-            <div className="date">1:55 AM · Mar 21, 2022</div>
+            <div className="date">{parseDate(date)}</div>
             <div className="counter-reactions">
               <div className="likes">
-                <span>230</span> Likes
+                <span>{likes_count}</span> Likes
               </div>
               <div className="dislikes">
-                <span>10</span> Dislikes
+                <span>{dislikes_count}</span> Dislikes
               </div>
               <div className="comments">
-                <span>10</span> Comments
+                <span>{comments_count}</span> Comments
               </div>
             </div>
           </PostDetails>
 
           <PostFooter>
-          <div className="icon-center like">
+            <div className="icon-center like">
               <ThumbUpOutlinedIcon fontSize="small" id="1" />
             </div>
             <div className="icon-center dislike">
