@@ -6,6 +6,8 @@ import { Login } from "../components/LoginRegistration/Login";
 export const LoginAndRegistration = () => {
   const [isActive, setIsActive] = useState("");
 
+  
+
   const handleClick = (e) => {
     if (e.target.id === "signup") {
       setIsActive("active");

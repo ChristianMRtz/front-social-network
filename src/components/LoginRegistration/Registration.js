@@ -1,20 +1,27 @@
-import axios from "axios";
+import api from "../../services/fetch";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../services/redux/actions/actions";
 
 export const Registration = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
-  // const [registrationError, setRegistrationError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    sessionStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   const handleSubmit = (e) => {
-    axios
+    api
       .post(
-        "http://localhost:3000/registrations",
+        "/registrations",
         {
           user: {
             email: email,
@@ -26,6 +33,7 @@ export const Registration = () => {
         { withCredentials: true }
       )
       .then((response) => {
+        dispatch(setUser(response.data));
         if (response.data.status === "created") {
           navigate("/home");
         }

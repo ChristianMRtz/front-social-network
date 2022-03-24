@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   flex: 0.65;
@@ -16,6 +17,58 @@ export const Container = styled.div`
       background-color: rgba(0, 0, 0, 3%);
     }
   }
+  .lds-ripple {
+    margin-left: 40%;
+    margin-top: 20%;
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+  .lds-ripple div {
+    position: absolute;
+    border: 4px solid #1da1f2;
+    opacity: 1;
+    border-radius: 50%;
+    animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+  }
+  .lds-ripple div:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  Button {
+    margin-left: 35%;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background-color: var(--blue-twitter) !important;
+    border: none !important;
+    color: #fff !important;
+    font-weight: normal !important;
+    text-transform: inherit !important;
+    height: 46px !important;
+    max-width: 260px;
+    max-height: 2em;
+    padding: 0 30px !important;
+    border-radius: 9999px !important;
+    :hover {
+      background-color: var(--blue-hover-twitter) !important;
+    }
+  }
+  @keyframes lds-ripple {
+    0% {
+      top: 36px;
+      left: 36px;
+      width: 0;
+      height: 0;
+      opacity: 1;
+    }
+    100% {
+      top: 0px;
+      left: 0px;
+      width: 72px;
+      height: 72px;
+      opacity: 0;
+    }
+  }
   @media only screen and (max-width: 1280px) {
     flex: 0.75;
   }
@@ -29,7 +82,6 @@ export const Container = styled.div`
     flex: 1;
     margin-bottom: 50px;
   }
-  
 `;
 
 export const Header = styled.div`
@@ -43,11 +95,27 @@ export const Header = styled.div`
 
 export const Postbox = styled.div`
   width: 566px;
-  /* min-height: 192px; */
   padding: 5px 15px;
-  border-bottom: 1px solid #ddd;
   @media only screen and (max-width: 1000px) {
     width: 100%;
+  }
+  input[type="submit"] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 9999px;
+    background: #03a9f4;
+    border: none;
+    color: #fff;
+    max-width: 100px;
+    cursor: pointer;
+    :hover {
+      filter: brightness(0.8);
+      transition: 0.1s ease-in-out;
+    }
   }
 `;
 export const Form = styled.form`
@@ -60,11 +128,30 @@ export const Form = styled.form`
     line-height: 24px;
     font-family: "Poppins", sans-serif;
   }
+  input[type="submit"] {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    border: 1px solid #333;
+    border-radius: 9999px;
+    background: #03a9f4;
+    border: none;
+    color: #fff;
+    max-width: 100px;
+    cursor: pointer;
+    :hover {
+      filter: brightness(0.8);
+      transition: 0.1s ease-in-out;
+    }
+  }
 `;
 export const Div = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  border-bottom: 1px solid #ddd;
   .columns {
     width: 100%;
     padding: 5px;
@@ -112,12 +199,13 @@ export const Avatar = styled.img`
   width: 50px;
   height: 50px;
   object-fit: fill;
+  border: 1px #ddd solid;
 `;
 
 /* Posts */
 
 export const Post = styled.div`
-  pointer-events: none;
+  /* pointer-events: none; */
   padding: 10px 15px;
   border-bottom: 1px solid #ddd;
   margin-top: 5px;
@@ -177,8 +265,20 @@ export const PostFooter = styled.div`
     align-items: stretch;
     gap: 10px;
   }
+  .like .MuiSvgIcon-root{
+    pointer-events: none;
+  }
+  .dislike .MuiSvgIcon-root{
+    pointer-events: none;
+  }
   .like .MuiSvgIcon-root:hover {
     fill: #1da1f2;
+  }
+  #likeactive .MuiSvgIcon-root {
+    fill: #1da1f2 ;
+  }
+  #dislikeactive .MuiSvgIcon-root {
+    fill: #f91880 ;
   }
   .dislike .MuiSvgIcon-root:hover {
     fill: #f91880;
@@ -188,5 +288,20 @@ export const PostFooter = styled.div`
   }
   .share .MuiSvgIcon-root:hover {
     fill: #1da1f2;
+  }
+`;
+
+export const StyledLink = styled(Link)`
+  text-decoration: none !important;
+  color: inherit;
+  display: inherit;
+  &:focus,
+  &:hover,
+  &:visited,
+  &:link,
+  &:active {
+    text-decoration: none !important;
+    color: inherit;
+    display: inherit;
   }
 `;

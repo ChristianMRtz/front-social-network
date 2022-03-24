@@ -1,22 +1,45 @@
+import api from "../../services/fetch";
 import { Postbox, Div, Form, Avatar } from "./styles";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-import { Button } from "@mui/material";
 import upload_gif from "../../assets/upload_gif.svg";
 import upload_img from "../../assets/upload_img.svg";
+import { useState } from "react";
+import { addPost } from "../../services/redux/actions/actions";
+import { useDispatch } from "react-redux";
 
 export const PostBox = () => {
+  const [text, setText] = useState("");
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const dispatch = useDispatch();
+  const handleSubmit = (e) => {
+      api
+        .post("/posts", {
+          post: {
+            body: text.split("\n").join(""),
+            user_id: user.currentUser.user.id,
+          },
+        })
+        .then((response) => {
+          dispatch(addPost(response.data));
+          window.location.reload(false);
+          console.log("response", response);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    e.preventDefault();
+  };
+
   return (
     <Postbox>
       <Form>
         <Div>
-          <Avatar
-            src="https://randomuser.me/api/portraits/men/3.jpg"
-            alt="user"
-          />
+          <Avatar src={user.currentUser.user.avatar} alt="user" />
           <div className="columns">
             <TextareaAutosize
               aria-label="empty textarea"
               placeholder="What's happening?"
+              onChange={(e) => setText(e.target.value)}
             />
             <div className="element-submit">
               <div className="imgs">
@@ -24,10 +47,12 @@ export const PostBox = () => {
                 <img src={upload_gif} alt="gif" />
               </div>
               <div>
-                <Button 
-                variant="outlined"
-                style={{"opacity": "0.5"}}
-                >Tweet</Button>
+                <input
+                  onClick={handleSubmit}
+                  type="submit"
+                  value="Tweet"
+                  style={{ opacity: "0.5" }}
+                />
               </div>
             </div>
           </div>

@@ -1,18 +1,25 @@
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Container } from "./styles";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../services/redux/actions/actions";
+import api from "../../services/fetch";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  // const [registrationError, setRegistrationError] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    sessionStorage.setItem("user", JSON.stringify(user));
+  }, [user]);
 
   const handleSubmit = (e) => {
-    axios
+    api
       .post(
-        "http://localhost:3000/sessions",
+        "/sessions",
         {
           user: {
             username: username,
@@ -22,6 +29,7 @@ export const Login = () => {
         { withCredentials: true }
       )
       .then((response) => {
+        dispatch(setUser(response.data));
         console.log("response", response);
         if (response.data.logged_in === true) {
           navigate("/home");
@@ -44,7 +52,7 @@ export const Login = () => {
           onChange={(e) => setUsername(e.target.value)}
           autoComplete="off"
         />
-                <input
+        <input
           required
           type="password"
           name="password"

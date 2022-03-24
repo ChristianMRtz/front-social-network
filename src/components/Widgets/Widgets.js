@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Search, Container, User } from "./styles";
-import api from "../../services/api";
+import api from "../../services/fetch";
 
 export const Widgets = () => {
   const [users, setUsers] = useState([]);
@@ -23,17 +23,20 @@ export const Widgets = () => {
       <Search type="text" placeholder="Search" />
       <User>
         <h1>Users</h1>
-        {users.sort(() => Math.random() - Math.random()).slice(0, 3).map((user) => (
-          <div className="content-user">
-            <div className="avatar-user">
-              <img src={user.avatar} alt="User" />
+        {users
+          .sort(() => Math.random() - Math.random())
+          .slice(0, 3)
+          .map((user) => (
+            <div className="content-user" key={user.id}>
+              <div className="avatar-user">
+                <img src={user.avatar} alt="User" />
+              </div>
+              <div className="user-profile">
+                <h2>{user.username}</h2>
+                <p>{user.email}</p>
+              </div>
             </div>
-            <div className="user-profile">
-              <h2>{user.username}</h2>
-              <p>{user.email}</p>
-            </div>
-          </div>
-        ))}
+          ))}
       </User>
     </Container>
   );

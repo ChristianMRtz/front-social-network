@@ -2,42 +2,106 @@ import { useEffect, useState } from "react";
 import { Comments } from "./Comments";
 import { PostStructure } from "./PostStructure";
 import { Container, Header } from "./styles";
-import api from "../../services/api";
+import { Div, Form, Avatar } from "../Feed/styles";
+import TextareaAutosize from "@mui/material/TextareaAutosize";
 import { useParams } from "react-router-dom";
+import api from "../../services/fetch";
+import { useDispatch, useSelector } from "react-redux";
+import { selectedPost } from "../../services/redux/actions/actions";
 
 export const Post = () => {
-  const [postBody, setPostBody] = useState([]);
-  const { id } = useParams();
+  const id = useParams().id;
+  const [text, setText] = useState("");
+  const [opacity, setOpacity] = useState(0.5);
+  const user = JSON.parse(sessionStorage.getItem("user"));
+  const dispatch = useDispatch();
+  const post = useSelector((state) => state.post);
+
+  const handleSubmit = (e) => {
+    setOpacity(text.length !== 0 ? 1 : 0.5);
+    api
+      .post("/comments", {
+        comment: {
+          body_comment: text,
+          post_id: id,
+          user_id: user.currentUser.user.id,
+        },
+      })
+      .then((response) => {
+        window.location.reload(false);
+        console.log("response", response);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+    e.preventDefault();
+  };
 
   useEffect(() => {
-    const retrievePost = async () => {
-      const response = await api.get("/posts/" + id);
-      return response.data;
+    const fetchPost = async () => {
+      const response = await api.get("/posts/" + id).catch((err) => {
+        console.log("Error: ", err);
+      });
+      dispatch(selectedPost(response.data));
     };
 
-    const getThePost = async () => {
-      const allPost = await retrievePost();
-      if (allPost) setPostBody(allPost);
-    };
-    getThePost();
-  }, [id]);
+    fetchPost();
+  }, [dispatch, id]);
 
   return (
     <Container>
       <Header>
         <p>Post</p>
       </Header>
-      <PostStructure
-        body={postBody.body}
-        username={postBody.username}
-        email={postBody.email}
-        avatar={postBody.avatar}
-        date={postBody.created_at}
-        comments_count={postBody.comments_count}
-        likes_count={postBody.likes_count}
-        dislikes_count={postBody.dislikes_count}
-      />
-      {postBody.comments?.map((comment) => (
+      {console.log(text.split("\n").join(""))}
+      {Object.keys(post).length === 0 ? (
+        <div className="lds-ripple">
+          <div></div>
+          <div></div>
+        </div>
+      ) : (
+        <PostStructure
+          key={post.id}
+          id={post.id}
+          title={post.title}
+          body={post.body}
+          avatar={post.avatar}
+          username={post.username}
+          email={post.email}
+          date={post.created_at}
+          comments_count={post.comments_count}
+          likes_count={post.likes_count}
+          dislikes_count={post.dislikes_count}
+        />
+      )}
+      <Form className="separation">
+        <Div>
+          <Avatar src={user.currentUser.user.avatar} alt="user" />
+          <div className="columns">
+            <TextareaAutosize
+              aria-label="empty textarea"
+              placeholder="Comment here!"
+              onChange={(e) =>
+                setText(e.target.value)
+              }
+            />
+            <div className="element-submit">
+              <div className="imgs"></div>
+              <div>
+                <input
+                  onClick={handleSubmit}
+                  type="submit"
+                  value="Comment"
+                  style={{ opacity: opacity }}
+                />
+              </div>
+            </div>
+          </div>
+        </Div>
+      </Form>
+      {post.comments?.sort(function (a, b) {
+            return new Date(b.created_at) - new Date(a.created_at);
+          }).map((comment) => (
         <Comments
           key={comment.id}
           comment={comment.body_comment}

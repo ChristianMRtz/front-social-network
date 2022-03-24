@@ -14,8 +14,10 @@ export const Comments = ({
   avatar,
   images,
 }) => {
+
   const parseDate = (date) => {
-    const dateFormat = new Date(date?.slice(0, -5));
+    const dateGMT = date.replace(/T/, " ");
+    const dateFormat = new Date(dateGMT);
     return dateFormat.toLocaleString("en-US", {
       weekday: "short",
       day: "numeric",
@@ -25,6 +27,8 @@ export const Comments = ({
       minute: "numeric",
     });
   };
+
+
 
   return (
     <Post>
@@ -41,7 +45,11 @@ export const Comments = ({
               <p>{comment}</p>
             </PostDescription>
           </div>
-          {images ? <Images src="https://picsum.photos/720/480" alt="post" /> : ""}
+          {images ? (
+            <Images src="https://picsum.photos/720/480" alt="post" />
+          ) : (
+            ""
+          )}
           <div className="date">{parseDate(date)}</div>
         </div>
       </PostBody>
