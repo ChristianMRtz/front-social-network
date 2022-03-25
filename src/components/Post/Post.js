@@ -20,13 +20,17 @@ export const Post = () => {
   const handleSubmit = (e) => {
     setOpacity(text.length !== 0 ? 1 : 0.5);
     api
-      .post("/comments", {
-        comment: {
-          body_comment: text,
-          post_id: id,
-          user_id: user.currentUser.user.id,
+      .post(
+        "/comments",
+        {
+          comment: {
+            body_comment: text,
+            post_id: id,
+            user_id: user.currentUser.user.id,
+          },
         },
-      })
+        { withCredentials: false }
+      )
       .then((response) => {
         window.location.reload(false);
         console.log("response", response);
@@ -81,9 +85,7 @@ export const Post = () => {
             <TextareaAutosize
               aria-label="empty textarea"
               placeholder="Comment here!"
-              onChange={(e) =>
-                setText(e.target.value)
-              }
+              onChange={(e) => setText(e.target.value)}
             />
             <div className="element-submit">
               <div className="imgs"></div>
@@ -99,18 +101,20 @@ export const Post = () => {
           </div>
         </Div>
       </Form>
-      {post.comments?.sort(function (a, b) {
-            return new Date(b.created_at) - new Date(a.created_at);
-          }).map((comment) => (
-        <Comments
-          key={comment.id}
-          comment={comment.body_comment}
-          username={comment.user.username}
-          email={comment.user.email}
-          avatar={comment.user.avatar}
-          date={comment.created_at}
-        />
-      ))}
+      {post.comments
+        ?.sort(function (a, b) {
+          return new Date(b.created_at) - new Date(a.created_at);
+        })
+        .map((comment) => (
+          <Comments
+            key={comment.id}
+            comment={comment.body_comment}
+            username={comment.user.username}
+            email={comment.user.email}
+            avatar={comment.user.avatar}
+            date={comment.created_at}
+          />
+        ))}
     </Container>
   );
 };

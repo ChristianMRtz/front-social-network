@@ -11,7 +11,7 @@ const Home = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await api.get("/posts").catch((err) => {
+      const response = await api.get("/posts", { withCredentials: false }).catch((err) => {
         console.log("Error: ", err);
       });
       dispatch(setPosts(response.data));

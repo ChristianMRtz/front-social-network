@@ -1,6 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
+  .error {
+    color: #f43648;
+    font-size: 15px;
+    padding: 20px 0;
+    text-align: center
+  }
   .container {
     display: flex;
     justify-content: center;

@@ -10,6 +10,7 @@ export const Registration = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -30,7 +31,7 @@ export const Registration = () => {
             password_confirmation: passwordConfirmation,
           },
         },
-        { withCredentials: true }
+        { withCredentials: false }
       )
       .then((response) => {
         dispatch(setUser(response.data));
@@ -40,11 +41,13 @@ export const Registration = () => {
       })
       .catch((error) => {
         console.log("registration error", error);
+        setError("Registration error");
       });
     e.preventDefault();
   };
   return (
     <Container>
+      {error && <h1 className="error">{error}</h1>}
       <form onSubmit={handleSubmit}>
         <h3>Sign up</h3>
         <input

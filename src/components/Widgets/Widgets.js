@@ -6,7 +6,7 @@ export const Widgets = () => {
   const [users, setUsers] = useState([]);
 
   const retrieveUsers = async () => {
-    const response = await api.get("/users");
+    const response = await api.get("/users", { withCredentials: false });
     return response.data;
   };
 

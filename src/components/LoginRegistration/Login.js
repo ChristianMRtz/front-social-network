@@ -8,6 +8,7 @@ import api from "../../services/fetch";
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -26,22 +27,20 @@ export const Login = () => {
             password: password,
           },
         },
-        { withCredentials: true }
+        { withCredentials: false }
       )
       .then((response) => {
         dispatch(setUser(response.data));
-        console.log("response", response);
-        if (response.data.logged_in === true) {
-          navigate("/home");
-        }
+        response.data.status === 401 ? setError(response.data.error) : navigate("/home");
       })
       .catch((error) => {
-        console.log("login error", error);
+        console.log("Login error: ", error);
       });
     e.preventDefault();
   };
   return (
     <Container>
+      {error && <h1 className="error">{error}</h1>}
       <form onSubmit={handleSubmit}>
         <h3>Sign in</h3>
         <input
