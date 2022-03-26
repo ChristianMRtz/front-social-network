@@ -72,7 +72,7 @@ export const Posts = ({
       <div className="post-avatar">
         <Avatar
           src={
-            avatar.length > 1
+            avatar
               ? avatar
               : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
           }
