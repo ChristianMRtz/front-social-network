@@ -52,6 +52,8 @@ export const Post = () => {
     fetchPost();
   }, [dispatch, id]);
 
+  const avatar = user.currentUser.user.avatar;
+
   return (
     <Container>
       <Header>
@@ -80,7 +82,14 @@ export const Post = () => {
       )}
       <Form className="separation">
         <Div>
-          <Avatar src={user.currentUser.user.avatar} alt="user" />
+          <Avatar
+            src={
+              avatar
+                ? avatar
+                : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+            alt="user"
+          />
           <div className="columns">
             <TextareaAutosize
               aria-label="empty textarea"
