@@ -12,29 +12,38 @@ export const PostBox = () => {
   const user = JSON.parse(sessionStorage.getItem("user"));
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
-      api
-        .post("/posts", {
-          post: {
-            body: text.split("\n").join(""),
-            user_id: user.currentUser.user.id,
-          },
-        })
-        .then((response) => {
-          dispatch(addPost(response.data));
-          window.location.reload(false);
-          console.log("response", response);
-        })
-        .catch((error) => {
-          console.log("error", error);
-        });
+    api
+      .post("/posts", {
+        post: {
+          body: text.split("\n").join(""),
+          user_id: user.currentUser.user.id,
+        },
+      })
+      .then((response) => {
+        dispatch(addPost(response.data));
+        window.location.reload(false);
+        console.log("response", response);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
     e.preventDefault();
   };
+  const avatar = user.currentUser.user.avatar;
 
   return (
     <Postbox>
       <Form>
         <Div>
-          <Avatar src={user.currentUser.user.avatar} alt="user" />
+          <Avatar
+            src={
+              avatar.length > 1
+                ? avatar
+                : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+            alt="user"
+          />
+
           <div className="columns">
             <TextareaAutosize
               aria-label="empty textarea"

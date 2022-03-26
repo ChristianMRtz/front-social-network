@@ -69,7 +69,14 @@ export const PostStructure = ({
     <>
       <Post>
         <div className="post-avatar">
-          <Avatar src={avatar} alt="user" />
+          <Avatar
+            src={
+              avatar.length > 1
+                ? avatar
+                : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+            }
+            alt="user"
+          />
         </div>
         <div className="username">
           <h3>{username}</h3>
@@ -95,7 +102,7 @@ export const PostStructure = ({
                 <span>{likes_count + counterLike}</span> Likes
               </div>
               <div className="dislikes">
-                <span>{dislikes_count+ counterDislike}</span> Dislikes
+                <span>{dislikes_count + counterDislike}</span> Dislikes
               </div>
               <div className="comments">
                 <span>{comments_count}</span> Comments

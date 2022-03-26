@@ -26,9 +26,6 @@ export const Posts = ({
   images,
   id,
 }) => {
-  // const [likes, setLikes] = useState([]);
-  // const [dislikes, setDisLikes] = useState([]);
-  // const user = JSON.parse(sessionStorage.getItem("user"));
   const [active, setActive] = useState("");
   const [activeDislike, setActiveDislike] = useState("");
   const [counterLike, setCounterLike] = useState(0);
@@ -73,7 +70,14 @@ export const Posts = ({
   return (
     <Post>
       <div className="post-avatar">
-        <Avatar src={avatar} alt="user" />
+        <Avatar
+          src={
+            avatar.length > 1
+              ? avatar
+              : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+          }
+          alt="user"
+        />
       </div>
       <PostBody>
         <div>
