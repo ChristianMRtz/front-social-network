@@ -29,7 +29,14 @@ export const Widgets = () => {
           .map((user) => (
             <div className="content-user" key={user.id}>
               <div className="avatar-user">
-                <img src={user.avatar} alt="User" />
+                <img
+                  src={
+                    user.avatar.length > 1
+                      ? user.avatar
+                      : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                  }
+                  alt="User"
+                />
               </div>
               <div className="user-profile">
                 <h2>{user.username}</h2>
