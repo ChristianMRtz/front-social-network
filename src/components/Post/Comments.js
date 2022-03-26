@@ -14,7 +14,6 @@ export const Comments = ({
   avatar,
   images,
 }) => {
-
   const parseDate = (date) => {
     const dateGMT = date.replace(/T/, " ");
     const dateFormat = new Date(dateGMT);
@@ -28,12 +27,17 @@ export const Comments = ({
     });
   };
 
-
-
   return (
     <Post>
       <div className="post-avatar">
-        <Avatar src={avatar} alt="user" />
+        <Avatar
+          src={
+            avatar.length > 1
+              ? avatar
+              : "https://cdn-icons-png.flaticon.com/512/149/149071.png"
+          }
+          alt="user"
+        />
       </div>
       <PostBody>
         <div>
